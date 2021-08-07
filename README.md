@@ -1,4 +1,4 @@
-# rapidapicovid
+# frontendcrud
 El presente repositorio, se utiliza para albergar un proyecto FrontEnd que consume una ApiRest para un CRUD.
 
 ## Comenzando 🚀
