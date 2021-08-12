@@ -23,7 +23,7 @@ namespace PersonaFrontEnd.Services
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:55459/api/");
+                    client.BaseAddress = new Uri(BaseUrl);
 
                     var deleteTask = client.DeleteAsync($"persona/" + id.ToString());
                     deleteTask.Wait();
@@ -76,7 +76,6 @@ namespace PersonaFrontEnd.Services
                 Debug.WriteLine(exc);
                 return new OperationResponse(0);
             }
-
         }
 
         public async Task<OperationResponse> GetById(int id)
@@ -86,7 +85,7 @@ namespace PersonaFrontEnd.Services
                 PersonaModel persona = null;
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:55459/api/");
+                    client.BaseAddress = new Uri(BaseUrl);
 
                     var responseTask = client.GetAsync("persona/" + id.ToString());
                     responseTask.Wait();
@@ -102,10 +101,11 @@ namespace PersonaFrontEnd.Services
 
                 return new OperationResponse(1,persona);
             }
-            catch (Exception)
+            catch (Exception exc)
             {
 
-                throw;
+                Debug.WriteLine(exc);
+                return new OperationResponse(0);
             }
         }
 
@@ -149,7 +149,7 @@ namespace PersonaFrontEnd.Services
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:55459/api/");
+                    client.BaseAddress = new Uri(BaseUrl);
 
                     var putTask = client.PutAsJsonAsync($"persona/{t.IdPersona}", t);
                     putTask.Wait();
