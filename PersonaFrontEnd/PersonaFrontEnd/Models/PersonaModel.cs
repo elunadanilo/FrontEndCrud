@@ -27,7 +27,7 @@ namespace PersonaFrontEnd.Models
         public string Direccion { get; set; }
 
         [Required]
-        public bool Genero { get; set; }
+        public string Genero { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

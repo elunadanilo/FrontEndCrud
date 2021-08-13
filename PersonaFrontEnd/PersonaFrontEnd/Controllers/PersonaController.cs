@@ -18,6 +18,7 @@ namespace PersonaFrontEnd.Controllers
     {
         private IPersonaDao personadao = new PersonaService();
         string BaseUrl = "http://localhost:55459/api/";
+        List<SelectListItem> listaSexo;
 
         public async Task<ActionResult> Index()
         {
@@ -35,6 +36,9 @@ namespace PersonaFrontEnd.Controllers
 
         public ActionResult Add()
         {
+            llenarSexo();
+            ViewBag.lista = listaSexo;
+
             return View();
         }
 
@@ -66,6 +70,8 @@ namespace PersonaFrontEnd.Controllers
 
             if (response.Code == 1)
             {
+                llenarSexo();
+                ViewBag.lista = listaSexo;
                 return View(response.Data);
             }
             else
@@ -154,6 +160,18 @@ namespace PersonaFrontEnd.Controllers
             {
                 return View(oPersona);
             }
+        }
+
+        
+
+        private void llenarSexo()
+        {
+            List<SelectListItem> listaS = new List<SelectListItem>();
+            listaS.Add(new SelectListItem() { Text = "Femenino", Value = "F" });
+            listaS.Add(new SelectListItem() { Text = "Masculino", Value = "M" });
+            listaS.Add(new SelectListItem { Text = "--Seleccione--", Value = " " });
+
+            listaSexo = listaS;
         }
     }
 }
